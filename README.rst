@@ -1,3 +1,38 @@
+This branch is used to test -finstrument=mock compiler extension
+****************************************************************
+
+Build on OSX
+=====
+
+Copy the compiler-rt lib (mock_san) to /usr/local/lib, so
+dynamic linker could find it.
+Note the following did not work:
+```
+export DYLD_LIBRARY_PATH=/Users/mg/WORK/finstrument_mock/rt/finstrument_mock/build.release/compiler-rt/
+export DYLD_FALLBACK_LIBRARY_PATH=/Users/mg/WORK/finstrument_mock/rt/finstrument_mock/build.release/compiler-rt/
+```
+
+```
+mkdir build.mock
+cd build.mock
+```
+Set up the new compiler. In the CMakeLists.txt file the compile flags and linker flags already set up.
+```
+cmake -G Ninja -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. -DCMAKE_CXX_COMPILER=/Users/mg/Work/finstrument_mock/compiler/build.release/bin/clang++ -DCMAKE_C_COMPILER=/Users/mg/Work/finstrument_mock/compiler/build.release/bin/clang
+```
+Execute the tests:
+```
+cd build.mock
+ctest
+```
+
+<hr/>
+<hr/>
+<hr/>
+<hr/>
+<hr/>
+
+
 CMake
 *****
 
